@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#000000">
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="200dp"
+        android:layout_height="40dp"
+        android:layout_marginTop="20dp"
+        android:gravity="center"
+        android:text="@string/TextViewText"
+        android:textColor="#FFFFFF"
+        android:textSize="24sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="200dp"
+        android:layout_height="40dp"
+        android:gravity="center"
+        android:layout_marginTop="50dp"
+        android:layout_marginBottom="1dp"
+        android:text="@string/TextView2Text"
+        android:textColor="#FFFFFF"
+        android:textSize="16sp"
+        app:layout_constraintBottom_toTopOf="@+id/edit_hour"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView" />
+
+    <EditText
+        android:id="@+id/edit_hour"
+        android:layout_width="300dp"
+        android:layout_height="60dp"
+        android:layout_marginTop="1dp"
+        android:layout_marginBottom="50dp"
+        android:hint="@string/Edit_hour_text"
+        android:inputType="text|time"
+        android:textColor="#DCDCDC"
+        android:textColorHint="#757575"
+        android:backgroundTint="#787878"
+        app:layout_constraintBottom_toTopOf="@+id/textView3"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView2"
+        android:autofillHints=""/>
+
+    <TextView
+        android:id="@+id/textView3"
+        android:layout_width="200dp"
+        android:layout_height="40dp"
+        android:gravity="center"
+        android:layout_marginTop="50dp"
+        android:layout_marginBottom="1dp"
+        android:text="@string/textView3Text"
+        android:textColor="#FFFFFF"
+        android:textSize="16sp"
+        app:layout_constraintBottom_toTopOf="@+id/edit_minute"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/edit_hour" />
+
+    <EditText
+        android:id="@+id/edit_minute"
+        android:layout_width="300dp"
+        android:layout_height="60dp"
+        android:layout_marginTop="1dp"
+        android:layout_marginBottom="50dp"
+        android:inputType="text"
+        android:textColor="#DCDCDC"
+        android:textColorHint="#757575"
+        android:backgroundTint="#787878"
+        android:hint="@string/Edit_minute_text"
+        app:layout_constraintBottom_toTopOf="@+id/textView4"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView3"
+        android:autofillHints="" />
+
+    <TextView
+        android:id="@+id/textView4"
+        android:layout_width="200dp"
+        android:layout_height="40dp"
+        android:gravity="center"
+        android:layout_marginTop="50dp"
+        android:layout_marginBottom="1dp"
+        android:text="@string/TextView4Text"
+        android:textColor="#FFFFFF"
+        android:textSize="16sp"
+        app:layout_constraintBottom_toTopOf="@+id/edit_text"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/edit_minute" />
+
+    <EditText
+        android:id="@+id/edit_text"
+        android:layout_width="300dp"
+        android:layout_height="60dp"
+        android:layout_marginTop="1dp"
+        android:layout_marginBottom="50dp"
+        android:inputType="text"
+        android:textColor="#DCDCDC"
+        android:textColorHint="#757575"
+        android:backgroundTint="#787878"
+        android:hint="@string/Edit_text_text"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView4"
+        android:autofillHints="" />
+
+    <TextView
+        android:id="@+id/saveEventButton"
+        android:layout_width="120dp"
+        android:layout_height="40dp"
+        android:background="#4CAF50"
+        android:gravity="center"
+        android:text="Save"
+        android:textColor="#000000"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/edit_text" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
