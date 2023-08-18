@@ -1,5 +1,7 @@
 package com.example.calendarCastom.ui.main
 
+import android.app.Dialog
+import android.app.TimePickerDialog
 import android.content.Context
 import android.graphics.Color
 import android.os.Bundle
@@ -11,9 +13,13 @@ import android.view.ViewGroup
 import android.widget.EditText
 import android.widget.ImageView
 import android.widget.TextView
+import android.widget.Toast
+import androidx.fragment.app.DialogFragment
 import androidx.lifecycle.ViewModelProvider
 import com.example.calendarCastom.Fragment_events
 import com.example.calendarCastom.R
+import java.text.SimpleDateFormat
+import java.util.*
 
 class NewEvent : Fragment() {
     var fragment_events: Fragment_events? = null
@@ -44,17 +50,36 @@ class NewEvent : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         val view = inflater.inflate(R.layout.fragment_new_event, container, false)
+        val time: EditText = view.findViewById<EditText>(R.id.edit_time)
+        time.setOnClickListener{
+            val cal = Calendar.getInstance()
+            val timeSetListener = TimePickerDialog.OnTimeSetListener { timePicker, hour, minute ->
+                cal.set(Calendar.HOUR_OF_DAY, hour)
+                cal.set(Calendar.MINUTE, minute)
+                time.setText(SimpleDateFormat("HH:mm").format(cal.time).toString())
+            }
+            TimePickerDialog(view.context, timeSetListener, cal.get(Calendar.HOUR_OF_DAY), cal.get(Calendar.MINUTE), true).show()
+        }
         view.findViewById<TextView>(R.id.saveEventButton).setOnClickListener {
             val day = viewModel.getDay()
-            if (day != null){
+            var hour = "00"
+            var minute = "00"
+            if(time.text.matches(Regex("[0-9]+:[0-9]+"))){
+                hour = time.text.split(':')[0]
+                minute = time.text.split(':')[1]
+            }
+            else{
+                hour = "25"//Для непрохождения следующего условия
+                Toast.makeText(view.context,"Invalid time input type. Acceptable type HH:mm",Toast.LENGTH_LONG).show()
+            }
+            if (day != null && hour.toInt() in 0..23 && minute.toInt() in 0..59){
                 viewModel.addEvent(
                     view.context, EntityDataBase(
                         year = viewModel.getYear(),
                         month = viewModel.getMonthInt(),
                         day = day,
-                        hour = view.findViewById<EditText>(R.id.edit_hour).text.toString().toInt(),
-                        minute = view.findViewById<EditText>(R.id.edit_minute).text.toString()
-                            .toInt(),
+                        hour = hour.toInt(),
+                        minute = minute.toInt(),
                         text = view.findViewById<EditText>(R.id.edit_text).text.toString()
                     )
                 )

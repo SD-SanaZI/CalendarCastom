@@ -1,8 +1,7 @@
 <resources>
     <string name="app_name">CalendarCastom</string>
-    <string name="textView3Text">Minute</string>
-    <string name="TextView2Text">Hour</string>
-    <string name="TextView4Text">Text</string>
+    <string name="TextView2Text">Time</string>
+    <string name="TextView3Text">Text</string>
     <string name="TextViewText">Add new event</string>
     <string name="Edit_hour_text">Enter hour</string>
     <string name="Edit_text_text">Enter text</string>
