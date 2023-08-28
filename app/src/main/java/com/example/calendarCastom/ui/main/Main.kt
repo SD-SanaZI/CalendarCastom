@@ -11,15 +11,16 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
-import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.example.calendarCastom.EntityDataBase
 import com.example.calendarCastom.Fragment_events
+import com.example.calendarCastom.MainViewModel
 import com.example.calendarCastom.R
 
 class Main : Fragment() {
-    var fragment_events: Fragment_events? = null
+    private var fragment_events: Fragment_events? = null
     private lateinit var viewModel: MainViewModel
 
     companion object {
@@ -50,8 +51,8 @@ class Main : Fragment() {
         setDaysText()
         setActiveDay(1,1)
         val list = view.findViewById<RecyclerView>(R.id.eventList)
-        var data = viewModel.getData()
-        var adapter: EventAdapter = EventAdapter(data, view.context, viewModel)
+        val data = viewModel.getData()
+        val adapter: EventAdapter = EventAdapter(data, view.context, viewModel)
         list.adapter = adapter
         list.layoutManager = LinearLayoutManager(view.context)
         view.findViewById<TextView>(R.id.month).text = viewModel.getMonth()

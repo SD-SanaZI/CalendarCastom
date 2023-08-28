@@ -4,6 +4,8 @@ import android.content.Context
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.example.calendarCastom.EntityDataBase
+import com.example.calendarCastom.MainViewModel
 import com.example.calendarCastom.R
 
 class EventAdapter(private var data: List<EntityDataBase>, private var context: Context, val viewModel: MainViewModel): RecyclerView.Adapter<EventViewHolder>(){

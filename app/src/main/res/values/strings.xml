@@ -6,6 +6,7 @@
     <string name="Edit_hour_text">Enter hour</string>
     <string name="Edit_text_text">Enter text</string>
     <string name="Edit_minute_text">Enter minute</string>
+    <string name="Unreal_day_string">+</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

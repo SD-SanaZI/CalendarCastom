@@ -1,4 +1,4 @@
-package com.example.calendarCastom.ui.main
+package com.example.calendarCastom
 
 import androidx.room.*
 import android.content.Context
@@ -31,7 +31,7 @@ interface DaoDataBase{
     fun getDayEvents(year: Int, month: Int, day: Int):List<EntityDataBase>
 
     @Insert
-    fun insert(event:EntityDataBase):Long
+    fun insert(event: EntityDataBase):Long
 
     @Query("DELETE FROM events WHERE id = :id")
     fun delete(id:Int?)
@@ -42,7 +42,7 @@ interface DaoDataBase{
 
 @Database(entities = [EntityDataBase::class], version = 1)
 abstract class DataBaseRoom: RoomDatabase(){
-    abstract fun dao():DaoDataBase
+    abstract fun dao(): DaoDataBase
 
     companion object{
         private const val DATABASE_NAME = "Events.db"

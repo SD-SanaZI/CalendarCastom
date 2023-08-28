@@ -1,8 +1,7 @@
-package com.example.calendarCastom.ui.main
+package com.example.calendarCastom
 
 import android.content.Context
 import android.util.Log
-import android.widget.TextView
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -19,11 +18,8 @@ class MainViewModel : ViewModel() {
     private val _month: MutableLiveData<Int> = MutableLiveData<Int>(0)
     val month : LiveData<Int> = _month
 
-    fun setMonth(value: Int){
-        if(value in 0..11)
-            _month.value = value
-        else
-            _month.value = 1
+    companion object{
+        const val UnrealDayString: String = "+"
     }
 
     fun updateViewText(){
@@ -38,43 +34,31 @@ class MainViewModel : ViewModel() {
                 if(1 + week * 7 + day - firstDay in 1..lastDay)
                     viewText[week][day] = (1 + week * 7 + day - firstDay).toString()
                 else
-                    viewText[week][day] = "+"
+                    viewText[week][day] = UnrealDayString
             }
         }
     }
 
-    private val monthName = listOf<String>("January", "February", "March", "April",
+    private val monthName = listOf<String>(
+        "January", "February", "March", "April",
         "May", "June", "July", "August",
-        "September", "October", "November", "December")
+        "September", "October", "November", "December"
+    )
+
+    private fun areRealDay(week:Int,day:Int): Boolean{
+        return viewText[week][day] != UnrealDayString
+    }
 
     fun updateEvents(context: Context){
-        if(viewText[weekNumber][dayNumber] != "+") {
-            val db = DataBaseRoom.getInstance(context)
-            _eventData.value = db.dao().getDayEvents(
+        if(areRealDay(weekNumber,dayNumber)){
+            _eventData.value = DBManager().getEvents(
+                context,
                 _year.value ?: 2023,
                 _month.value ?: 7,
                 viewText[weekNumber][dayNumber].toInt()
             )
             Log.d("updateEvent ${_year.value ?: 2023} ${_month.value ?: 7} ${viewText[weekNumber][dayNumber].toInt()}", "${_eventData.value.toString()} ")
         }
-    }
-
-    fun addEvent(context: Context, event: EntityDataBase){
-        val db = DataBaseRoom.getInstance(context)
-        val num = db.dao().insert(event)
-        Log.d("addEvent", num.toString())
-    }
-
-    fun deleteEvent(context: Context, id: Int?){
-        val db = DataBaseRoom.getInstance(context)
-        db.dao().delete(id)
-        Log.d("DeleteEvent", "done")
-    }
-
-    fun deleteEventsBase(context: Context){
-        val db = DataBaseRoom.getInstance(context)
-        db.dao().deleteAll()
-        Log.d("DeleteEventBase", "done")
     }
 
     fun nextMonth(){
@@ -116,16 +100,12 @@ class MainViewModel : ViewModel() {
     }
 
     fun getDay(): Int?{
-        if(viewText[weekNumber][dayNumber] != "+")
-            return viewText[weekNumber][dayNumber].toInt()
+        return if(areRealDay(weekNumber,dayNumber))
+            viewText[weekNumber][dayNumber].toInt()
         else
-            return null
+            null
     }
-/*
-    fun setData(data : List<EntityDataBase>){
-        _eventData.value = data
-    }
-*/
+
     fun getData():List<EntityDataBase>{
         return _eventData.value ?: listOf<EntityDataBase>()
     }

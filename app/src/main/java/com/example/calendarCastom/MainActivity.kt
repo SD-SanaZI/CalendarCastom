@@ -4,7 +4,6 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.lifecycle.ViewModelProvider
 import com.example.calendarCastom.ui.main.Main
-import com.example.calendarCastom.ui.main.MainViewModel
 import com.example.calendarCastom.ui.main.NewEvent
 
 class MainActivity : AppCompatActivity(), Fragment_events {
@@ -19,6 +18,7 @@ class MainActivity : AppCompatActivity(), Fragment_events {
             supportFragmentManager.beginTransaction()
                 .replace(R.id.container, Main.newInstance())
                 .commitNow()
+            NotificationManager().updateNotification(this)
         }
     }
 
@@ -42,5 +42,3 @@ interface Fragment_events{
     fun beginFragment()
     fun finishFragment()
 }
-
-//TODO сервис на уведомление при наступлении события

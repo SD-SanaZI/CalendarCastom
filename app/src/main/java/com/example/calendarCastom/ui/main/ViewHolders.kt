@@ -6,6 +6,9 @@ import android.view.View
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import com.example.calendarCastom.DBManager
+import com.example.calendarCastom.EntityDataBase
+import com.example.calendarCastom.MainViewModel
 import com.example.calendarCastom.R
 
 class EventViewHolder(view: View, private val context: Context, private val viewModel: MainViewModel): RecyclerView.ViewHolder(view){
@@ -19,7 +22,7 @@ class EventViewHolder(view: View, private val context: Context, private val view
         minute.text = data.minute.toString()
         text.text = data.text
         deleteButton.setOnClickListener{
-            viewModel.deleteEvent(context, data.id)
+            DBManager().deleteEvent(context, data.id)
             viewModel.updateEvents(context)
         }
     }
